@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,44 +31,45 @@ public class SignUpForAServiceTest extends Methods {
         loginToDev();
         CarManagementPage carManagementPage = new CarManagementPage(driver);
         ServicePage servicePage = new ServicePage(driver);
+        SoftAssert softAssert = new SoftAssert();
 
         // "+" button
         tapElementAt(carManagementPage.functionalityScreen, 0.5, 0.465);
         // Sign up for a service button
+        Thread.sleep(2000);
         tapElementAt(carManagementPage.functionalityScreen, 0.5, 0.658);
 
-        Assert.assertTrue(servicePage.serviceHeader.isDisplayed(), "Service page is not present");
-        Assert.assertTrue(servicePage.chooseCarButton.isDisplayed(), "chooseCarButton is not present");
-        servicePage.chooseCarButton.click();
-        Assert.assertTrue(servicePage.vin.isDisplayed(), "vin is not present");
-        Assert.assertTrue(servicePage.year.isDisplayed(), "year is not present");
-        Assert.assertTrue(servicePage.guarantee.isDisplayed(), "guarantee is not present");
-        Assert.assertTrue(servicePage.TOWork.isDisplayed(), "TOWork is not present");
-        Assert.assertTrue(servicePage.tiresWork.isDisplayed(), "tiresWork is not present");
-        Assert.assertTrue(servicePage.repairWork.isDisplayed(), "repairWork is not present");
-        Assert.assertTrue(servicePage.comment.isDisplayed(), "comment is not present");
-        Assert.assertTrue(servicePage.selectButton.isDisplayed(), "selectButton is not present");
+        softAssert.assertTrue(servicePage.serviceHeader.isDisplayed(), "Service page is not present");
+        softAssert.assertTrue(servicePage.chooseCarButton.isDisplayed(), "chooseCarButton is not present");
+        softAssert.assertTrue(servicePage.vin.isDisplayed(), "vin is not present");
+        softAssert.assertTrue(servicePage.year.isDisplayed(), "year is not present");
+        softAssert.assertTrue(servicePage.guarantee.isDisplayed(), "guarantee is not present");
+        softAssert.assertTrue(servicePage.TOWork.isDisplayed(), "TOWork is not present");
+        softAssert.assertTrue(servicePage.tiresWork.isDisplayed(), "tiresWork is not present");
+        softAssert.assertTrue(servicePage.repairWork.isDisplayed(), "repairWork is not present");
+        softAssert.assertTrue(servicePage.comment.isDisplayed(), "comment is not present");
+        softAssert.assertTrue(servicePage.selectButton.isDisplayed(), "selectButton is not present");
 
         servicePage.TOWork.click();
         servicePage.selectButton.click();
-        Assert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
+        servicePage.acceptAlert.click();
+        softAssert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
         // tap at back arrow
         tapElementAt(carManagementPage.functionalityScreen, 0.096, 0.078);
         servicePage.TOWork.click();
 
         servicePage.tiresWork.click();
         servicePage.selectButton.click();
-        servicePage.selectButton.click();
-        Assert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
+        softAssert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
         // tap at back arrow
         tapElementAt(carManagementPage.functionalityScreen, 0.096, 0.078);
         servicePage.tiresWork.click();
 
         servicePage.repairWork.click();
         servicePage.selectButton.click();
-        servicePage.selectButton.click();
-        Assert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
+        softAssert.assertTrue(servicePage.mapsServices.isDisplayed(), "mapsServices is not present");
 
+        softAssert.assertAll();
     }
 
 }

@@ -1,20 +1,30 @@
+import lombok.var;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class VINCheckIsWorkCorrectlyTest extends Methods {
 
     @Test
-    public void testLoginToDEVTest() throws InterruptedException {
+    public void testVINCheckIsWorkCorrectly() throws InterruptedException {
         System.out.println(this.getClass().getName() + " " + "started!");
+
+        WebDriverWait wait = new WebDriverWait(this.driver, 30);
         CarManagementPage carManagementPage = new CarManagementPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
         Methods methods = new Methods();
         VINCheckPage vinCheckPage = new VINCheckPage(driver);
         VehicleFoundPage vehicleFoundPage = new VehicleFoundPage(driver);
+        SoftAssert softAssert = new SoftAssert();
 
-        methods.loginToDev();
+        loginToDev();
 
-//        carManagementPage.burgerButton.click();
+        // click burger button
+        tapElementAt(carManagementPage.functionalityScreen, 0.917, 0.098);
+        Thread.sleep(1000);
+
         sideMenuPage.VINCheck.click();
         vinCheckPage.vinCheckHeader.isDisplayed();
         vinCheckPage.noCarsText.isDisplayed();
@@ -25,28 +35,29 @@ public class VINCheckIsWorkCorrectlyTest extends Methods {
 
         // check Where found VIN modal
         vinCheckPage.whereFindVIN.click();
-        Assert.assertEquals(vinCheckPage.whereFindVINHeader.getText(), "Где найти VIN-номер?", "Modal is not present or text is not correct");
+        softAssert.assertEquals(vinCheckPage.whereFindVINHeader.getText(), "Где найти VIN-номер?", "Modal is not present or text is not correct");
         vinCheckPage.whereFindVINCloseButton.click();
 
         // check incorrect vin number
         vinCheckPage.vinNumberInput.sendKeys(methods.generateRandomHexString(17));
         vinCheckPage.findCarButton.click();
-        Assert.assertEquals(vehicleFoundPage.notFoundHeader.getText(), "Автомобиль не обнаружен", "Modal is not present or text is incorrect");
-        Assert.assertEquals(vehicleFoundPage.notFoundBody.getText(), "Указанный VIN-номер не зарегистрирован в системе. Проверьте введенный номер или введите другой.", "Text is incorrect");
+        softAssert.assertEquals(vehicleFoundPage.notFoundHeader.getText(), "Автомобиль не обнаружен", "Modal is not present or text is incorrect");
+        softAssert.assertEquals(vehicleFoundPage.notFoundBody.getText(), "Указанный VIN-номер не зарегистрирован в системе. Проверьте введенный номер или введите другой.", "Text is incorrect");
         vehicleFoundPage.notFoundCloseButton.click();
 
         // check correct VIN number
         vinCheckPage.vinNumberInput.clear();
         vinCheckPage.vinNumberInput.sendKeys(vin1);
         vinCheckPage.findCarButton.click();
-        Assert.assertTrue(vehicleFoundPage.vehicleFoundHeader.isDisplayed(), "Modal or string is not presented");
-        Assert.assertTrue(vehicleFoundPage.vinNumber1.isDisplayed(), "vinNumber is not presented");
-        Assert.assertTrue(vehicleFoundPage.modelCar.isDisplayed(), "modelCar is not presented");
-        Assert.assertTrue(vehicleFoundPage.misosMonitoring.isDisplayed(), "misosMonitoring is not presented");
-        Assert.assertTrue(vehicleFoundPage.deviceStatus.isDisplayed(), "deviceStatus is not presented");
-        Assert.assertTrue(vehicleFoundPage.mailButton.isDisplayed(), "mailButton is not presented");
-        driver.navigate().back();
-        Assert.assertTrue(vinCheckPage.specialOffer.isDisplayed(), "specialOffer is not presented");
+        softAssert.assertTrue(vehicleFoundPage.vehicleFoundHeader.isDisplayed(), "Modal or string is not presented");
+        softAssert.assertTrue(vehicleFoundPage.vinNumber1.isDisplayed(), "vinNumber is not presented");
+        softAssert.assertTrue(vehicleFoundPage.modelCar.isDisplayed(), "modelCar is not presented");
+        softAssert.assertTrue(vehicleFoundPage.misosMonitoring.isDisplayed(), "misosMonitoring is not presented");
+        softAssert.assertTrue(vehicleFoundPage.deviceStatus.isDisplayed(), "deviceStatus is not presented");
+        softAssert.assertTrue(vehicleFoundPage.mailButton.isDisplayed(), "mailButton is not presented");
+        vehicleFoundPage.closeButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable((vinCheckPage.specialOffer)));
+        softAssert.assertTrue(vinCheckPage.specialOffer.isDisplayed(), "specialOffer is not presented");
 
         vinCheckPage.vinNumberInput.clear();
         vinCheckPage.vinNumberInput.sendKeys(vin2);
@@ -64,8 +75,9 @@ public class VINCheckIsWorkCorrectlyTest extends Methods {
 
         vinCheckPage.nextButton.click();
 
-        Assert.assertTrue(carManagementPage.carManagementHeader.isDisplayed());
+        softAssert.assertTrue(carManagementPage.carManagementHeader.isDisplayed());
 
+        softAssert.assertAll();
     }
 
 }

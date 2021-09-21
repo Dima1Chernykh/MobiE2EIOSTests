@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,24 +30,25 @@ public class AddDriverTest extends Methods {
 
         CarManagementPage carManagementPage = new CarManagementPage(driver);
         AddDriverPage addDriverPage = new AddDriverPage(driver);
+        SoftAssert softAssert = new SoftAssert();
 
         loginToDev();
 
         // "+" button
         tapElementAt(carManagementPage.functionalityScreen, 0.5, 0.47);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         // drivers button
         tapElementAt(carManagementPage.functionalityScreen, 0.5, 0.43);
-        Thread.sleep(1000);
+        driver.switchTo().alert().accept();
         // add driver button
         tapElementAt(carManagementPage.functionalityScreen, 0.5, 0.568);
 
-        Assert.assertTrue(addDriverPage.descriptionText.isDisplayed(), "Add driver page is not present");
-        Assert.assertTrue(addDriverPage.phoneHeaderText.isDisplayed(), "Input header is not present");
-        Assert.assertEquals(addDriverPage.phoneInput.getText(), "+7 999 999 99 99");
-        Assert.assertTrue(addDriverPage.addButton.isDisplayed(), "Add button is not present");
+        softAssert.assertTrue(addDriverPage.descriptionText.isDisplayed(), "Add driver page is not present");
+        softAssert.assertTrue(addDriverPage.phoneHeaderText.isDisplayed(), "Input header is not present");
+        softAssert.assertEquals(addDriverPage.phoneInput.getText(), "+7 999 999 99 99");
+        softAssert.assertTrue(addDriverPage.addButton.isDisplayed(), "Add button is not present");
         addDriverPage.addFromContactsButton.click();
-        Assert.assertTrue(addDriverPage.searchContactsInput.isDisplayed(), "Contacts page is not present");
+        softAssert.assertTrue(addDriverPage.searchContactsInput.isDisplayed(), "Contacts page is not present");
         addDriverPage.closeButton.click();
 
         // add driver button
@@ -54,10 +56,11 @@ public class AddDriverTest extends Methods {
         addDriverPage.phoneInput.sendKeys(phoneAddDriver);
         String phoneText = addDriverPage.phoneInput.getText();
         addDriverPage.addButton.click();
-        Assert.assertTrue(addDriverPage.addDriverHeader.isDisplayed());
-        Assert.assertEquals(phoneText.replaceAll("\\s", ""), (addDriverPage.addDriverNumber.getText()));
+        softAssert.assertTrue(addDriverPage.addDriverHeader.isDisplayed());
+        softAssert.assertEquals(phoneText.replaceAll("\\s", ""), (addDriverPage.addDriverNumber.getText()));
         addDriverPage.addDriverClose.click();
-        Assert.assertTrue(carManagementPage.functionalityScreen.isDisplayed(), "Add driver page is not closed");
+        softAssert.assertTrue(carManagementPage.functionalityScreen.isDisplayed(), "Add driver page is not closed");
+        softAssert.assertAll();
 
     }
 

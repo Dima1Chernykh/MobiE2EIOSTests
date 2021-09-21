@@ -14,7 +14,7 @@ public class DocumentsPage {
     }
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Документы\"`]")
     public IOSElement documentsHeader;
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Документы\"`][3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Документы\"])[3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther")
     public IOSElement backArrow;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Инструкция Mobikey\"`][2]")
     public IOSElement mobikeyManual;

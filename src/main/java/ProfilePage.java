@@ -12,7 +12,7 @@ public class ProfilePage extends BaseMethods {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Профиль\"`][3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeOther[@name=\"Профиль\"])[3]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther")
     public IOSElement backArrow;
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"Профиль\"`]")
     public IOSElement profileHeader;

@@ -22,7 +22,7 @@ public class VINCheckPage extends BaseMethods {
     public IOSElement vinNumberInput;
     @iOSXCUITFindBy(accessibility = "Найти автомобиль")
     public IOSElement findCarButton;
-    @iOSXCUITFindBy(accessibility = "СПЕЦПРЕДЛОЖЕНИЕ Получите скидку на КАСКО до 50%")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains 'СПЕЦПРЕДЛОЖЕНИЕ'")
     public IOSElement specialOffer;
     @iOSXCUITFindBy(accessibility = "Где найти VIN-номер?")
     public IOSElement whereFindVIN;

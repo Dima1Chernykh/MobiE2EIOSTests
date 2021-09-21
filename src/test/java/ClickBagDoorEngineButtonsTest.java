@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,6 +26,7 @@ public class ClickBagDoorEngineButtonsTest extends Methods {
         System.out.println(this.getClass().getName() + " " + "started!");
         CarManagementPage carManagementPage = new CarManagementPage(driver);
         SideMenuPage sideMenuPage = new SideMenuPage(driver);
+        SoftAssert softAssert = new SoftAssert();
 
         loginToDev();
 
@@ -38,7 +40,7 @@ public class ClickBagDoorEngineButtonsTest extends Methods {
         tapElementAt(carManagementPage.functionalityScreen,0.5, 0.235);
         //tap at logger
         tapElementAt(carManagementPage.functionalityScreen,0.096, 0.909);
-        Assert.assertTrue(carManagementPage.openBag.isDisplayed(), "Response is not detected");
+        softAssert.assertTrue(carManagementPage.openBag.isDisplayed(), "Response for bag is not detected");
         // check left door
         Thread.sleep(10000);
         carManagementPage.clearLogCarManagement.click();
@@ -47,7 +49,7 @@ public class ClickBagDoorEngineButtonsTest extends Methods {
         tapElementAt(carManagementPage.functionalityScreen,0.2, 0.47);
         //tap at logger
         tapElementAt(carManagementPage.functionalityScreen,0.096, 0.909);
-        Assert.assertTrue(carManagementPage.door.isDisplayed(), "Response is not detected");
+        softAssert.assertTrue(carManagementPage.door.isDisplayed(), "Response for left door is not detected");
         // check right door
         Thread.sleep(10000);
         carManagementPage.clearLogCarManagement.click();
@@ -56,7 +58,7 @@ public class ClickBagDoorEngineButtonsTest extends Methods {
         tapElementAt(carManagementPage.functionalityScreen,0.8, 0.47);
         //tap at logger
         tapElementAt(carManagementPage.functionalityScreen,0.096, 0.909);
-        Assert.assertTrue(carManagementPage.door.isDisplayed(), "Response is not detected");
+        softAssert.assertTrue(carManagementPage.door.isDisplayed(), "Response for right door is not detected");
         // start engine
         Thread.sleep(10000);
         carManagementPage.clearLogCarManagement.click();
@@ -66,13 +68,15 @@ public class ClickBagDoorEngineButtonsTest extends Methods {
                 .waitAction(waitOptions(Duration.ofMillis(5000))).release().perform();
         //tap at logger
         tapElementAt(carManagementPage.functionalityScreen,0.096, 0.909);
-        Assert.assertTrue(carManagementPage.startEng.isDisplayed(), "Response is not detected");
+        softAssert.assertTrue(carManagementPage.startEng.isDisplayed(), "Response for engine is not detected");
         carManagementPage.closeLogCarManagement.click();
 
         // logout
         // tap at burger button
         tapElementAt(carManagementPage.functionalityScreen, 0.917, 0.098);
         sideMenuPage.logout.click();
+
+        softAssert.assertAll();
     }
 
 }

@@ -29,9 +29,9 @@ public class VehicleFoundPage extends BaseMethods {
     @iOSXCUITFindBy(accessibility = "Закрыть")
     public IOSElement closeButton;
     // car is not found
-    @iOSXCUITFindBy(accessibility = "Закрыть")
+    @iOSXCUITFindBy(accessibility = "Автомобиль не обнаружен")
     public IOSElement notFoundHeader;
-    @iOSXCUITFindBy(accessibility = "Закрыть")
+    @iOSXCUITFindBy(accessibility = "Указанный VIN-номер не зарегистрирован в системе. Проверьте введенный номер или введите другой.")
     public IOSElement notFoundBody;
     @iOSXCUITFindBy(accessibility = "Закрыть")
     public IOSElement notFoundCloseButton;

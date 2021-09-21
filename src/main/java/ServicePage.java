@@ -18,7 +18,7 @@ public class ServicePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Записаться на сервис\"`][6]")
     public IOSElement serviceHeader;
     // car block1
-    @iOSXCUITFindBy(xpath = "////XCUIElementTypeOther[contains(@text, 'Выбрать другой автомобиль')]")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains 'Выбрать другой автомобиль'")
     public IOSElement chooseCarButton;
     // car block 2
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == \"VIN НОМЕР\"`]")
@@ -39,7 +39,9 @@ public class ServicePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"Выбрать сервисный центр\"`][2]")
     public IOSElement selectButton;
     // choose service page
-    @iOSXCUITFindBy(accessibility = "Google Maps")
+    @iOSXCUITFindBy(accessibility = "При использовании")
+    public IOSElement acceptAlert;
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains 'Выбор сервисного центра'")
     public IOSElement mapsServices;
 
 }

@@ -65,3 +65,5 @@ public class BaseMethods {
 // instruments -s devices
 //to find bundleID
 // osascript -e 'id of app ".../Library/Developer/Xcode/DerivedData/Mobikey-aoboaebbptbmibhkbzctthzxbpta/Build/Products/Release-iphonesimulator/Mobikey.app"'
+//show taps on simulator
+// defaults write com.apple.iphonesimulator ShowSingleTouches 1

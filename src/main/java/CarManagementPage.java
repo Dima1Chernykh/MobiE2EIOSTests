@@ -26,12 +26,12 @@ public class CarManagementPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`label == \"X\"`][2]")
     public IOSElement closeLogCarManagement;
     // log responses
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@text, '/permission/subscribe-vehicle')]")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains '/permission/subscribe-vehicle'")
     public IOSElement subscribeCar;
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@text, '/openBag/')]")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains '/openBag/'")
     public IOSElement openBag;
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@text, '/manage//door/')]")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains '/manage//door/'")
     public IOSElement door;
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@text, '/manage/engStart/')]")
+    @iOSXCUITFindBy(iOSNsPredicate = "label contains '/manage/engStart/'")
     public IOSElement startEng;
 }

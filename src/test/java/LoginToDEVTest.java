@@ -2,6 +2,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class LoginToDEVTest extends Methods {
 
@@ -15,6 +16,7 @@ public class LoginToDEVTest extends Methods {
         PhoneNumberPage3 phoneNumberPage3 = new PhoneNumberPage3(this.driver);
         PhoneCallingPage4 phoneCallingPage4 = new PhoneCallingPage4(this.driver);
         CarManagementPage carManagementPage = new CarManagementPage(this.driver);
+        SoftAssert softAssert = new SoftAssert();
 
         wait.until(ExpectedConditions.elementToBeClickable((startPage1.submitBegin)));
         startPage1.submitBegin.click();
@@ -39,8 +41,9 @@ public class LoginToDEVTest extends Methods {
         wait.until(ExpectedConditions.elementToBeClickable((phoneCallingPage4.confirmCodeInput)));
         phoneCallingPage4.confirmCodeInput.sendKeys(confirmCodeDEV);
 
-        Assert.assertTrue(carManagementPage.carManagementHeader.isDisplayed(), "Login is not completed");
+        softAssert.assertTrue(carManagementPage.carManagementHeader.isDisplayed(), "Login is not completed");
 
+        softAssert.assertAll();
     }
 
 }
